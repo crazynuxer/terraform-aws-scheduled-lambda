@@ -1,5 +1,5 @@
 module "lambda_role" {
-  source = "github.com/traveloka/terraform-aws-iam-role//modules/lambda?ref=v0.4.4"
+  source = "github.com/crazynuxer/terraform-aws-iam-role//modules/lambda?ref=v0.5.1"
 
   product_domain   = "${var.product_domain}"
   descriptive_name = "${var.lambda_name}"
@@ -24,14 +24,14 @@ resource "aws_iam_role_policy" "lambda_additional_policy" {
 }
 
 module "random_id" {
-  source = "github.com/traveloka/terraform-aws-resource-naming?ref=v0.7.1"
+  source = "github.com/crazynuxer/terraform-aws-resource-naming?ref=v0.6.0"
 
   name_prefix   = "${var.product_domain}-${var.lambda_name}"
   resource_type = "lambda_function"
 }
 
 module "cwrule_name" {
-  source = "github.com/traveloka/terraform-aws-resource-naming?ref=v0.7.1"
+  source = "github.com/crazynuxer/terraform-aws-resource-naming?ref=v0.6.0"
 
   name_prefix   = "${var.product_domain}-${var.lambda_name}"
   resource_type = "cloudwatch_event_rule"
@@ -48,8 +48,7 @@ locals {
 }
 
 resource "aws_lambda_function" "lambda_classic" {
-  s3_bucket     = "${var.lambda_code_bucket}"
-  s3_key        = "${var.lambda_code_path}"
+  filename      = "${var.lambda_code_filename}"
   function_name = "${module.random_id.name}"
   description   = "${var.lambda_description}"
   role          = "${module.lambda_role.role_arn}"
@@ -68,8 +67,7 @@ resource "aws_lambda_function" "lambda_classic" {
 }
 
 resource "aws_lambda_function" "lambda_vpc" {
-  s3_bucket     = "${var.lambda_code_bucket}"
-  s3_key        = "${var.lambda_code_path}"
+  filename      = "${var.lambda_code_filename}"
   function_name = "${module.random_id.name}"
   description   = "${var.lambda_description}"
   role          = "${module.lambda_role.role_arn}"

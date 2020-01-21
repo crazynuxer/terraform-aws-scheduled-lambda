@@ -1,6 +1,3 @@
-# [DEPRECATED] We are not maintaining this module anymore
-# Please use https://github.com/traveloka/terraform-aws-lambda
-
 # Scheduled AWS Lambda function
 =============================
 
@@ -13,8 +10,7 @@ Module Input Variables
 ----------------------
 
 - `region` - Region where the lambda is deployed. The default is ap-southeast-1
-- `lambda_code_bucket` - The name of the s3 bucket where the deployment resides
-- `lambda_code_path` - Name of the S3 deployment object
+- `lambda_code_filename` - filename for lamba code eg: dummy.zip
 - `lambda_name` - Unique name for Lambda function
 - `lambda_runtime` - A [valid](http://docs.aws.amazon.com/cli/latest/reference/lambda/create-function.html#options) Lambda runtime environment
 - `lambda_handler` - The entrypoint into your Lambda function

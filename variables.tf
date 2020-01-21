@@ -1,11 +1,6 @@
-variable "lambda_code_bucket" {
+variable "lambda_code_filename" {
   type        = "string"
-  description = "The name of the s3 bucket where the deployment resides"
-}
-
-variable "lambda_code_path" {
-  type        = "string"
-  description = "Name of the S3 Object that contains the function zip file"
+  description = "Name of lambda code that contains the function in zip file"
 }
 
 variable "lambda_name" {
